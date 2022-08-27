@@ -1,3 +1,16 @@
+# HOW TO USE
+
+#### Change the .env copy to .env and add the path to your invoices folder
+
+## HOW TO GET PATH
+
+#### Navigate to your invoices folder in your terminal
+
+#### use `pwd` to print the working directory and that is your PATH
+
+## Then you should be able to run the function. 
+## Note: Make sure the filename for your invoices does NOT include '/', '-', or spaces
+
 # WHEN PULLING DOWN
 
 ## After pulling down the repo.
