@@ -6,9 +6,11 @@ Then tells you your taxable income and how much you need to pay in taxes.
 import os
 import sys
 from pdfminer.high_level import extract_text
+from dotenv import dotenv_values
 
 sys.tracebacklimit = 0
-PATH = os.environ.get('INVOICE_PATH')
+config = dotenv_values(".env")
+PATH = config["INVOICE_PATH"]
 invoices = os.listdir(PATH)
 INVOICE_INCOME = []
 
