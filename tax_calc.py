@@ -44,4 +44,7 @@ else:
     CURRENT_TAXABLE_INCOME = TAXABLE_INCOME - 180000
     TAX = FOURTH_TAX_BRACKET + CURRENT_TAXABLE_INCOME * 0.39
 
+TAKE_HOME_PAY =  TAXABLE_INCOME - TAX
+
 print(f'You need to pay ${round(TAX, 2)} in taxes.')
+print(f'Your take home pay is ${round(TAKE_HOME_PAY, 2)}.')
