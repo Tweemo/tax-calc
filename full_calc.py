@@ -11,20 +11,22 @@ from dotenv import dotenv_values
 sys.tracebacklimit = 0
 config = dotenv_values(".env")
 PATH = config["INVOICE_PATH"]
-invoices = os.listdir(PATH)
+companies = os.listdir(PATH)
 INVOICE_INCOME = []
-
-for invoice in invoices:
-    if invoice.endswith('.pdf'):
-        text = extract_text(f'{PATH}/{invoice}')
-        arr = text.split('\n')
-        intsInArr = []
-        for string in arr:
-            try:
-                intsInArr.append(float(string))
-            except ValueError:
-                pass
-        INVOICE_INCOME.append(max(intsInArr))
+for company in companies:
+    if 'Unichem' in company:
+        invoices = os.listdir(f'{PATH}/{company}')
+        for invoice in invoices:
+            if invoice.endswith('.pdf'):
+                text = extract_text(f'{PATH}/{company}/{invoice}')
+                arr = text.split('\n')
+                intsInArr = []
+                for string in arr:
+                    try:
+                        intsInArr.append(float(string))
+                    except ValueError:
+                        pass
+                INVOICE_INCOME.append(max(intsInArr))
 
 TAXABLE_INCOME = sum(INVOICE_INCOME)
 print(f'Your Taxable income is: ${TAXABLE_INCOME}')
@@ -43,7 +45,8 @@ elif 14000 < TAXABLE_INCOME <= 48000:
     CURRENT_TAX_BRACKET = CURRENT_TAXABLE_INCOME * 0.175
     if IETC is True:
         TAX = FIRST_TAX_BRACKET + CURRENT_TAX_BRACKET - 520
-    else: TAX = FIRST_TAX_BRACKET + CURRENT_TAX_BRACKET
+    else:
+        TAX = FIRST_TAX_BRACKET + CURRENT_TAX_BRACKET
 elif 48000 < TAXABLE_INCOME <= 70000:
     CURRENT_TAXABLE_INCOME = TAXABLE_INCOME - 48000
     TAX = SECOND_TAX_BRACKET + CURRENT_TAXABLE_INCOME * 0.3
